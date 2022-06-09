@@ -18,6 +18,12 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function NewTodo(props) {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(e);
+    }
+
+
     return (
         // <Box sx={{ flexGrow: 1 }}>
         //     <Grid container spacing={0}>
@@ -34,10 +40,18 @@ function NewTodo(props) {
         //     </Grid>
         // </Box>
 
-        <div className='newTodo'>
+        // <div className='newTodo'>
+        //     <InputField />
+        //     <AddButton />
+        // </div>
+        <form
+            className='newTodo'
+            onSubmit={handleSubmit}
+
+        >
             <InputField />
             <AddButton />
-        </div>
+        </form>
     );
 }
 
