@@ -1,56 +1,73 @@
-import AddButton from "./AddButton";
-import InputField from "./InputField";
-
-import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
+import Button from "@mui/material/Button";
 import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
+import TextField from '@mui/material/TextField';
 
 import './NewTodo.css';
 
 const Item = styled(Paper)(({ theme }) => ({
-    // backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
     padding: theme.spacing(1),
     textAlign: 'left',
-    // color: theme.palette.text.secondary,
 }));
 
-function NewTodo(props) {
+function NewTodo({ tasks, setTasks }) {{
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(e);
+        setTasks([...tasks, {
+            todo: e.target[0].value,
+            done: false,
+        }])
+        e.target[0].value = "";
     }
 
-
     return (
-        // <Box sx={{ flexGrow: 1 }}>
-        //     <Grid container spacing={0}>
-        //         <Grid item xs={10}>
-        //             <Item>
-        //                 <InputField />
-        //             </Item>
-        //         </Grid>
-        //         <Grid item xs={2}>
-        //             <Item>
-        //                 <AddButton />
-        //             </Item>
-        //         </Grid>
-        //     </Grid>
-        // </Box>
-
-        // <div className='newTodo'>
-        //     <InputField />
-        //     <AddButton />
-        // </div>
         <form
             className='newTodo'
             onSubmit={handleSubmit}
-
         >
-            <InputField />
-            <AddButton />
+            <TextField
+                id="outlined-basic"
+                label="Add new task"
+                variant="outlined"
+                className='inputTask'
+            />
+            <Button
+                variant="text"
+                className="btnAdd"
+            >
+                Add
+            </Button>
+        </form>
+    );
+}
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setTasks([...tasks, {
+            todo: e.target[0].value,
+            done: false,
+        }])
+        e.target[0].value = "";
+    }
+
+    return (
+        <form
+            className='newTodo'
+            onSubmit={handleSubmit}
+        >
+            <TextField
+                id="outlined-basic"
+                label="Add new task"
+                variant="outlined"
+                className='inputTask'
+            />
+            <Button
+                variant="text"
+                className="btnAdd"
+            >
+                Add
+            </Button>
         </form>
     );
 }

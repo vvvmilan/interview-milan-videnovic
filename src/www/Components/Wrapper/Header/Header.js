@@ -1,6 +1,4 @@
-import React from 'react';
-
-function Header(props) {
+function Header() {
     return (
         <div>
             <h1>To Do app by Milan Videnović</h1>

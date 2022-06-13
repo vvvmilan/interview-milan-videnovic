@@ -15,19 +15,18 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-function TaskList(props) {
+function TaskList({ tasks, handleDelete }) {
     return (
         <Box sx={{ width: '100%' }}>
             <Stack spacing={1}>
-                <Item>
-                    <Task />
-                </Item>
-                <Item>
-                    <Task />
-                </Item>
-                <Item>
-                    <Task />
-                </Item>
+                {
+                    tasks.map((task) =>
+                        <Task
+                            key={task.id}
+                            task={task}
+                            handleDelete={handleDelete}
+                        />)
+                }
             </Stack>
         </Box>
     );
