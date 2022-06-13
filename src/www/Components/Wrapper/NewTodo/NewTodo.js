@@ -18,7 +18,7 @@ function NewTodo({ tasks, setTasks, getTasks }) {{
         e.target[0].value.length
             ? axios.post("https://wiv90yxntf.execute-api.eu-west-1.amazonaws.com/local", {
                 "todo": e.target[0].value,
-                "done": false
+                "done": true
             })
                 .then(getTasks()
                 )

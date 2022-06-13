@@ -4,7 +4,6 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Paper from "@mui/material/Paper";
 import "./Task.css";
 
-
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -14,13 +13,18 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-
 function Task({ task, handleDelete }) {
+    const taskDone = task.done
+        ? {textDecoration: "line-through"}
+        : {color: "blue"}
+
     return (
         <div>
             <div className="task">
                 <Item className="task">
-                    <div>
+                    <div className="taskTitle"
+                         style={taskDone}
+                    >
                         <Checkbox {...label} />
                         {task.todo}
                     </div>
@@ -30,7 +34,6 @@ function Task({ task, handleDelete }) {
                 </Item>
             </div>
         </div>
-
     );
 }
 
