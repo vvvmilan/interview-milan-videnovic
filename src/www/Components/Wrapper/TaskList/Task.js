@@ -16,7 +16,7 @@ const Item = styled(Paper)(({ theme }) => ({
 function Task({ task, handleDelete }) {
     const taskDone = task.done
         ? {textDecoration: "line-through"}
-        : {color: "blue"}
+        : null
 
     return (
         <div>

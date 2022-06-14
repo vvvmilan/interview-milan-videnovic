@@ -1,10 +1,11 @@
 import { styled } from '@mui/material/styles';
+import axios from "axios";
 import Button from "@mui/material/Button";
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 
 import './NewTodo.css';
-import axios from "axios";
+import {BASE_URL} from "../../../../config";
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -15,12 +16,18 @@ const Item = styled(Paper)(({ theme }) => ({
 function NewTodo({ tasks, setTasks, getTasks }) {{
     const handleSubmit = (e) => {
         e.preventDefault();
+        const newTask = {
+            "todo": e.target[0].value,
+            "done": true
+        }
         e.target[0].value.length
-            ? axios.post("https://wiv90yxntf.execute-api.eu-west-1.amazonaws.com/local", {
-                "todo": e.target[0].value,
-                "done": true
-            })
-                .then(getTasks()
+            ? axios.post(BASE_URL, newTask)
+                .then(() => {
+                    setTasks([
+                        ...tasks,
+                        newTask
+                        ])
+                    }
                 )
                 .catch(error => console.log(error))
             : alert(`Please name your task!`)
