@@ -3,6 +3,9 @@ import Checkbox from '@mui/material/Checkbox';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Paper from "@mui/material/Paper";
 import "./Task.css";
+import EditIcon from '@mui/icons-material/Edit';
+import TextField from "@mui/material/TextField";
+import CheckIcon from '@mui/icons-material/Check';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const Item = styled(Paper)(({ theme }) => ({
@@ -13,7 +16,8 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-function Task({ task, handleDelete }) {
+function Task({ task, handleDelete, handleEdit, isEditing }) {
+
     const taskDone = task.done
         ? {textDecoration: "line-through"}
         : null
@@ -22,15 +26,31 @@ function Task({ task, handleDelete }) {
         <div>
             <div className="task">
                 <Item className="task">
-                    <div className="taskTitle"
-                         style={taskDone}
-                    >
-                        <Checkbox {...label} />
-                        {task.todo}
+                    {isEditing
+                        ?
+                        <TextField
+                            label="edit task"
+                            id="standard-size-normal"
+                            defaultValue={task.todo}
+                            variant="standard"
+                        />
+                        :
+                        <div className="taskTitle" style={taskDone}>
+                            <Checkbox {...label} />
+                            {task.todo}
+                        </div>
+                    }
+                    <div>
+                        {isEditing
+                            ? <CheckIcon onClick={() => isEditing=false}/>
+                            : <EditIcon
+                                onClick={handleEdit}
+                            />
+                        }
+                        <DeleteForeverIcon
+                            onClick={() => handleDelete(task.id)}
+                        />
                     </div>
-                    <DeleteForeverIcon
-                        onClick={() => handleDelete(task.id)}
-                    />
                 </Item>
             </div>
         </div>

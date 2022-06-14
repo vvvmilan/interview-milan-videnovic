@@ -11,6 +11,7 @@ import ProgressBar from "./www/Components/Wrapper/ProgressBar";
 function App() {
     const [tasks, setTasks] = useState([]);
     const [isLoading, setIsLoading] = useState(true)
+    const [isEditing, setIsEditing] = useState(false)
     const getTasks = () => {
         axios.get(BASE_URL)
             .then(result => {
@@ -33,7 +34,14 @@ function App() {
             .catch(error => console.log(error))
     };
 
-  return (
+    const handleEdit = () => {
+        setIsEditing(true);
+        console.log()
+        console.log(isEditing)
+    }
+
+
+    return (
     <div className="App">
         <Header />
         <NewTodo
@@ -45,6 +53,8 @@ function App() {
         <TaskList
             tasks={tasks}
             handleDelete={handleDelete}
+            handleEdit={handleEdit}
+            isEditing={isEditing}
         />
     </div>
   );
