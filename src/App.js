@@ -6,13 +6,16 @@ import {BASE_URL} from "./config";
 import Header from "./www/Components/Wrapper/Header/Header";
 import TaskList from "./www/Components/Wrapper/TaskList/TaskList";
 import NewTodo from "./www/Components/Wrapper/NewTodo/NewTodo"
+import ProgressBar from "./www/Components/Wrapper/ProgressBar";
 
 function App() {
     const [tasks, setTasks] = useState([]);
+    const [isLoading, setIsLoading] = useState(true)
     const getTasks = () => {
         axios.get(BASE_URL)
             .then(result => {
-                setTasks(result.data.data)
+                setTasks(result.data.data);
+                setIsLoading(false);
             })
             .catch(error => console.log(error))
     }
@@ -38,6 +41,7 @@ function App() {
             setTasks={setTasks}
             getTasks={getTasks}
         />
+        {isLoading && <ProgressBar />}
         <TaskList
             tasks={tasks}
             handleDelete={handleDelete}
