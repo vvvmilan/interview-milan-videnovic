@@ -15,7 +15,17 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-function TaskList({ tasks, handleDelete, handleEdit, isEditing }) {
+function TaskList({
+                      tasks,
+                      isDone,
+                      handleCheckBox,
+                      striketrough,
+                      handleDelete,
+                      handleEdit, isEditing, handleSubmitEdit,
+                      handleSubmitEditInput,
+                      handleChangeEditTask,
+
+}) {
     return (
         <Box sx={{ width: '100%' }}>
             <Stack spacing={1}>
@@ -24,9 +34,17 @@ function TaskList({ tasks, handleDelete, handleEdit, isEditing }) {
                         <Task
                             key={task.id}
                             task={task}
+                            isDone={isDone}
+                            handleCheckBox={handleCheckBox}
+                            striketrough={striketrough}
                             handleDelete={handleDelete}
                             handleEdit={handleEdit}
                             isEditing={isEditing}
+                            handleSubmitEdit={handleSubmitEdit}
+
+                            handleSubmitEditInput={handleSubmitEditInput}
+                            handleChangeEditTask={handleChangeEditTask}
+
                         />)
                 }
             </Stack>

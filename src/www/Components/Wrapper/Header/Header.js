@@ -1,7 +1,7 @@
 function Header() {
     return (
         <div>
-            <h1>To Do app by Milan Videnović</h1>
+            <h2>To Do app by Milan Videnović</h2>
         </div>
     );
 }

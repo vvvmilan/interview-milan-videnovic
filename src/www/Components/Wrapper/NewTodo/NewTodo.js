@@ -18,11 +18,12 @@ function NewTodo({ tasks, setTasks, getTasks }) {{
         e.preventDefault();
         const newTask = {
             "todo": e.target[0].value,
-            "done": true
+            "done": false
         }
         e.target[0].value.length
             ? axios.post(BASE_URL, newTask)
-                .then(() => {
+                .then((response) => {
+                    console.log(response)
                     setTasks([
                         ...tasks,
                         newTask

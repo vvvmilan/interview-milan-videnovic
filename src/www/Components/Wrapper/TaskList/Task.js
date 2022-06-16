@@ -16,39 +16,77 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-function Task({ task, handleDelete, handleEdit, isEditing }) {
+function Task({ task,
+                  isDone,
+                  handleCheckBox,
+                  striketrough,
+                  handleDelete, handleEdit, isEditing, handleSubmitEdit, handleSubmitEditInput,
+                  handleChangeEditTask,
+
+              }) {
+
+    // isDone  true ? {textDecoration: "line-through"} : null
+
 
     const taskDone = task.done
         ? {textDecoration: "line-through"}
         : null
 
+    // isDone === true ? console.log(isDone) : console.log('And');
+
+
+
+
+
     return (
         <div>
             <div className="task">
                 <Item className="task">
-                    {isEditing
+                    {isEditing === task.id
                         ?
-                        <TextField
-                            label="edit task"
-                            id="standard-size-normal"
-                            defaultValue={task.todo}
-                            variant="standard"
-                        />
+                            <TextField
+                                label="edit task"
+                                id="standard-size-normal"
+                                defaultValue={task.todo}
+                                variant="standard"
+
+                                onChange={handleChangeEditTask}
+                                onKeyPress={(e) => {
+                                    // console.log(e.target.value)
+                                    e.key === 'Enter' &&
+                                    handleSubmitEdit(task.id)
+                                    // handleSubmitEditInput(task.id)
+                                    // console.log(e.key)
+                                }
+                                }
+                                    // onSubmit={handleSubmitEdit}
+                                // onSubmit={(e) => e.preventDefault()
+                                    // console.log(e.target.value)}
+
+                            />
                         :
-                        <div className="taskTitle" style={taskDone}>
-                            <Checkbox {...label} />
+                        <div className="taskTitle" style={striketrough}>
+                            <Checkbox {...label} onClick={() => handleCheckBox(task.id)}/>
                             {task.todo}
                         </div>
                     }
                     <div>
-                        {isEditing
-                            ? <CheckIcon onClick={() => isEditing=false}/>
+                        {isEditing === task.id
+                            ? <CheckIcon
+                                className={`icon`}
+                                 onClick={() => handleSubmitEdit(task.id)}
+                                sx={{ color: '#575b88' }}
+                            />
                             : <EditIcon
-                                onClick={handleEdit}
+                                className={`icon`}
+                                onClick={() => handleEdit(task.id)}
+                                sx={{ color: '#575b88' }}
                             />
                         }
                         <DeleteForeverIcon
+                            className={`icon`}
                             onClick={() => handleDelete(task.id)}
+                            sx={{ color: '#575b88' }}
                         />
                     </div>
                 </Item>

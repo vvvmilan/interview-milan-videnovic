@@ -8,6 +8,18 @@
 
 .btnAdd {
     margin: 0 5px 0 10px;
+    padding: 16px;
+    color: #575b88;
+    font-weight: bold;
+    /*background-color: aqua;*/
+    border-radius: 6px;
+    border: 0;
+}
+
+.btnAdd:hover {
+    background-color: #575b88;
+    color: #fff;
+    cursor: pointer;
 }
 
 .inputTask {
