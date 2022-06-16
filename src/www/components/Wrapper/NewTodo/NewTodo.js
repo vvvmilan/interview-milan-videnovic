@@ -16,8 +16,8 @@ const Item = styled(Paper)(({ theme }) => ({
     textAlign: 'left',
 }));
 
-function NewTodo({ setIsLoading }) {{
-    const { tasks, setTasks } = useContext(AppContext)
+function NewTodo() {{
+    const { tasks, setTasks, setIsLoading } = useContext(AppContext)
 
     const handleSubmit = (e) => {
         setIsLoading(true);

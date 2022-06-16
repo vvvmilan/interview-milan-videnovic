@@ -18,18 +18,10 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function TaskList({
-                      isDone,
                       handleCheckBox,
-                      striketrough,
                       handleDelete,
-                      handleEdit, isEditing,
-                      // handleSubmitEdit,
-                      handleSubmitEditInput,
-                      // handleChangeEditTask,
-
-    editTask,
-    setEditTask,
-                      setIsLoading,
+                      handleEdit,
+                      isEditing,
                       setIsEditing,
 
 
@@ -44,18 +36,10 @@ function TaskList({
                         <Task
                             task={task}
                             key={task.id}
-                            isDone={isDone}
                             handleCheckBox={handleCheckBox}
-                            // striketrough={striketrough}
                             handleDelete={handleDelete}
                             handleEdit={handleEdit}
                             isEditing={isEditing}
-                            // handleSubmitEdit={handleSubmitEdit}
-
-                            handleSubmitEditInput={handleSubmitEditInput}
-                            // handleChangeEditTask={handleChangeEditTask}
-
-                            setIsLoading={setIsLoading}
                             setIsEditing={setIsEditing}
                         />)
                 }

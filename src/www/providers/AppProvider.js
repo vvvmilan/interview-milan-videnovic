@@ -3,18 +3,23 @@ import { createContext, useState } from "react";
 const AppContext = createContext({
     tasks: [],
     setTasks: () => {},
+    isLoading: true,
+    setIsLoading: () => {},
 })
 
 const AppProvider = ({ children }) => {
-    const logMe = () => console.log('Logged from the provider')
     const [tasks, setTasks] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+
 
     return (
         <AppContext.Provider
             value={{
-                logMe,
                 tasks,
                 setTasks,
+                isLoading,
+                setIsLoading,
             }}
         >
             { children }

@@ -12,7 +12,7 @@ import axios from "axios";
 import {BASE_URL} from "../../../../config";
 import {useState} from "react";
 
-import { useAppContext, AppContext } from "../../../providers/AppProvider";
+import { AppContext } from "../../../providers/AppProvider";
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const Item = styled(Paper)(({ theme }) => ({
@@ -23,19 +23,20 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-function Task({ task,
-                  isDone,
+function Task({
+                  task,
                   handleCheckBox,
-                  striketrough,
                   handleDelete,
                   handleEdit,
                   isEditing,
-                  setIsLoading,
                   setIsEditing,
-
               }) {
 
-    const { tasks, setTasks } = useContext(AppContext)
+    const {
+        tasks,
+        setTasks,
+        setIsLoading,
+    } = useContext(AppContext)
 
     const taskDone = task.done
         ? {textDecoration: "line-through"}

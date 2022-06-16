@@ -10,8 +10,7 @@ import ProgressBar from "./www/components/Wrapper/ProgressBar";
 import { AppContext } from "./www/providers/AppProvider";
 
 function App() {
-    const { tasks, setTasks } = useContext(AppContext);
-    const [isLoading, setIsLoading] = useState(true)
+    const { tasks, setTasks, isLoading, setIsLoading } = useContext(AppContext);
     const [isEditing, setIsEditing] = useState(false)
     const [isDone, setIsDone] = useState(false)
     const [striketrough, setStriketrough] = useState(null);
@@ -90,9 +89,7 @@ function App() {
     return (
         <div className="App">
             <Header />
-            <NewTodo
-                setIsLoading={setIsLoading}
-            />
+            <NewTodo/>
             {isLoading && <ProgressBar />}
             <TaskList
                 isDone={isDone}
