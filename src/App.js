@@ -2,11 +2,12 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 
 import './App.css';
+import AppProvider from "./www/providers/AppProvider";
 import {BASE_URL} from "./config";
-import Header from "./www/Components/Wrapper/Header/Header";
-import TaskList from "./www/Components/Wrapper/TaskList/TaskList";
-import NewTodo from "./www/Components/Wrapper/NewTodo/NewTodo"
-import ProgressBar from "./www/Components/Wrapper/ProgressBar";
+import Header from "./www/components/Wrapper/Header/Header";
+import TaskList from "./www/components/Wrapper/TaskList/TaskList";
+import NewTodo from "./www/components/Wrapper/NewTodo/NewTodo"
+import ProgressBar from "./www/components/Wrapper/ProgressBar";
 
 function App() {
     const [tasks, setTasks] = useState([]);
@@ -87,33 +88,35 @@ function App() {
     }
 
     return (
-    <div className="App">
-        <Header />
-        <NewTodo
-            tasks={tasks}
-            setTasks={setTasks}
-            getTasks={getTasks}
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
-        />
-        {isLoading && <ProgressBar />}
-        <TaskList
-            tasks={tasks}
-            isDone={isDone}
-            handleCheckBox={handleCheckBox}
-            striketrough={striketrough}
-            handleDelete={handleDelete}
-            handleEdit={handleEdit}
-            isEditing={isEditing}
-            handleSubmitEditInput={handleSubmitEditInput}
+        <AppProvider>
+            <div className="App">
+                <Header />
+                <NewTodo
+                    tasks={tasks}
+                    setTasks={setTasks}
+                    getTasks={getTasks}
+                    isLoading={isLoading}
+                    setIsLoading={setIsLoading}
+                />
+                {isLoading && <ProgressBar />}
+                <TaskList
+                    tasks={tasks}
+                    isDone={isDone}
+                    handleCheckBox={handleCheckBox}
+                    striketrough={striketrough}
+                    handleDelete={handleDelete}
+                    handleEdit={handleEdit}
+                    isEditing={isEditing}
+                    handleSubmitEditInput={handleSubmitEditInput}
 
-            setIsLoading={setIsLoading}
-            setTasks={setTasks}
-            setIsEditing={setIsEditing}
+                    setIsLoading={setIsLoading}
+                    setTasks={setTasks}
+                    setIsEditing={setIsEditing}
 
 
-        />
-    </div>
+                />
+            </div>
+        </AppProvider>
   );
 }
 

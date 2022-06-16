@@ -1,3 +1,5 @@
+import { useContext } from "react";
+
 import {styled} from "@mui/material/styles";
 import Checkbox from '@mui/material/Checkbox';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -9,6 +11,8 @@ import CheckIcon from '@mui/icons-material/Check';
 import axios from "axios";
 import {BASE_URL} from "../../../../config";
 import {useState} from "react";
+
+import { useAppContext, AppContext } from "../../../providers/AppProvider";
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const Item = styled(Paper)(({ theme }) => ({
@@ -31,6 +35,9 @@ function Task({ task,
                   setIsEditing,
 
               }) {
+
+    const appContext = useContext(AppContext)
+    appContext.logMe()
 
     const taskDone = task.done
         ? {textDecoration: "line-through"}
