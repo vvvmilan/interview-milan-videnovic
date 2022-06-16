@@ -65,12 +65,6 @@ function Task({ task,
         setNewTaskInputValue(e.target.value)
     }
 
-
-
-
-
-
-
     return (
         <div>
             <div className="task">
@@ -90,8 +84,11 @@ function Task({ task,
                                 }
                             />
                         :
-                        <div className="taskTitle" style={striketrough}>
-                            <Checkbox {...label} onClick={() => handleCheckBox(task.id)}/>
+                        <div className="taskTitle" style={taskDone}>
+                            <Checkbox {...label}
+                                      onClick={() => handleCheckBox(task.id)}
+                                      checked={task.done}
+                            />
                             {task.todo}
                         </div>
                     }

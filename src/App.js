@@ -41,10 +41,6 @@ function App() {
 
     const handleCheckBox = (id) => {
         setIsLoading(true)
-        const checkTask = {
-            "done": true,
-        }
-
         if(isDone === false) {
             setIsDone(true);
             setStriketrough({textDecoration: "line-through"})
@@ -52,7 +48,7 @@ function App() {
             setIsDone(false)
             setStriketrough(null);
         }
-        axios.patch(`${BASE_URL}/${id}`, checkTask)
+        axios.patch(`${BASE_URL}/${id}/change-status`)
             .then(() => {
                 const newTasks = tasks.map(task => {
                     return task.id === id
