@@ -27,17 +27,15 @@ function Task({ task,
                   isDone,
                   handleCheckBox,
                   striketrough,
-                  handleDelete, handleEdit, isEditing,
-
-    tasks,
+                  handleDelete,
+                  handleEdit,
+                  isEditing,
                   setIsLoading,
-                  setTasks,
                   setIsEditing,
 
               }) {
 
-    const appContext = useContext(AppContext)
-    appContext.logMe()
+    const { tasks, setTasks } = useContext(AppContext)
 
     const taskDone = task.done
         ? {textDecoration: "line-through"}

@@ -1,4 +1,4 @@
-// import React from 'react';
+import { useContext } from 'react';
 import Task from "./Task";
 
 import * as React from 'react';
@@ -6,6 +6,8 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
+
+import { AppContext } from "../../../providers/AppProvider";
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -16,7 +18,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function TaskList({
-                      tasks,
                       isDone,
                       handleCheckBox,
                       striketrough,
@@ -29,20 +30,20 @@ function TaskList({
     editTask,
     setEditTask,
                       setIsLoading,
-                      setTasks,
                       setIsEditing,
 
 
 
 }) {
+    const { tasks } = useContext(AppContext)
     return (
         <Box sx={{ width: '100%' }}>
             <Stack spacing={1}>
                 {
                     tasks.map((task) =>
                         <Task
-                            key={task.id}
                             task={task}
+                            key={task.id}
                             isDone={isDone}
                             handleCheckBox={handleCheckBox}
                             // striketrough={striketrough}
@@ -54,11 +55,8 @@ function TaskList({
                             handleSubmitEditInput={handleSubmitEditInput}
                             // handleChangeEditTask={handleChangeEditTask}
 
-                            tasks={tasks}
                             setIsLoading={setIsLoading}
-                            setTasks={setTasks}
                             setIsEditing={setIsEditing}
-
                         />)
                 }
             </Stack>

@@ -1,8 +1,11 @@
+import { useContext } from "react";
+
 import { styled } from '@mui/material/styles';
 import axios from "axios";
 import Button from "@mui/material/Button";
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
+import { AppContext } from "../../../providers/AppProvider";
 
 import './NewTodo.css';
 import {BASE_URL} from "../../../../config";
@@ -13,7 +16,9 @@ const Item = styled(Paper)(({ theme }) => ({
     textAlign: 'left',
 }));
 
-function NewTodo({ tasks, setTasks, getTasks, isLoading, setIsLoading }) {{
+function NewTodo({ setIsLoading }) {{
+    const { tasks, setTasks } = useContext(AppContext)
+
     const handleSubmit = (e) => {
         setIsLoading(true);
         e.preventDefault();
@@ -39,6 +44,14 @@ function NewTodo({ tasks, setTasks, getTasks, isLoading, setIsLoading }) {{
             : alert(`Please name your task!`)
         e.target[0].value = "";
     }
+/*    const handleSubmit = (e) => {
+        e.preventDefault();
+        setTasks([...tasks, {
+            todo: e.target[0].value,
+            done: false,
+        }])
+        e.target[0].value = "";
+    }*/
 
     return (
         <form
@@ -55,27 +68,13 @@ function NewTodo({ tasks, setTasks, getTasks, isLoading, setIsLoading }) {{
                    value="ADD"
                    className="btnAdd"
             />
-            {/*<Button*/}
-            {/*    variant="text"*/}
-            {/*    className="btnAdd"*/}
-            {/*    onClick={handleSubmit}*/}
-            {/*>*/}
-            {/*    Add*/}
-            {/*</Button>*/}
         </form>
     );
 }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setTasks([...tasks, {
-            todo: e.target[0].value,
-            done: false,
-        }])
-        e.target[0].value = "";
-    }
 
-    return (
+
+/*    return (
         <form
             className='newTodo'
             onSubmit={handleSubmit}
@@ -92,8 +91,7 @@ function NewTodo({ tasks, setTasks, getTasks, isLoading, setIsLoading }) {{
             >
                 Add
             </Button>
-        </form>
-    );
+        </form>*/
 }
 
 export default NewTodo;

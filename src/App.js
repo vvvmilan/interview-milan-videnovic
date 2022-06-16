@@ -1,16 +1,16 @@
 import axios from "axios";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 
 import './App.css';
-import AppProvider from "./www/providers/AppProvider";
 import {BASE_URL} from "./config";
 import Header from "./www/components/Wrapper/Header/Header";
 import TaskList from "./www/components/Wrapper/TaskList/TaskList";
 import NewTodo from "./www/components/Wrapper/NewTodo/NewTodo"
 import ProgressBar from "./www/components/Wrapper/ProgressBar";
+import { AppContext } from "./www/providers/AppProvider";
 
 function App() {
-    const [tasks, setTasks] = useState([]);
+    const { tasks, setTasks } = useContext(AppContext);
     const [isLoading, setIsLoading] = useState(true)
     const [isEditing, setIsEditing] = useState(false)
     const [isDone, setIsDone] = useState(false)
@@ -88,35 +88,24 @@ function App() {
     }
 
     return (
-        <AppProvider>
-            <div className="App">
-                <Header />
-                <NewTodo
-                    tasks={tasks}
-                    setTasks={setTasks}
-                    getTasks={getTasks}
-                    isLoading={isLoading}
-                    setIsLoading={setIsLoading}
-                />
-                {isLoading && <ProgressBar />}
-                <TaskList
-                    tasks={tasks}
-                    isDone={isDone}
-                    handleCheckBox={handleCheckBox}
-                    striketrough={striketrough}
-                    handleDelete={handleDelete}
-                    handleEdit={handleEdit}
-                    isEditing={isEditing}
-                    handleSubmitEditInput={handleSubmitEditInput}
-
-                    setIsLoading={setIsLoading}
-                    setTasks={setTasks}
-                    setIsEditing={setIsEditing}
-
-
-                />
-            </div>
-        </AppProvider>
+        <div className="App">
+            <Header />
+            <NewTodo
+                setIsLoading={setIsLoading}
+            />
+            {isLoading && <ProgressBar />}
+            <TaskList
+                isDone={isDone}
+                handleCheckBox={handleCheckBox}
+                striketrough={striketrough}
+                handleDelete={handleDelete}
+                handleEdit={handleEdit}
+                isEditing={isEditing}
+                handleSubmitEditInput={handleSubmitEditInput}
+                setIsLoading={setIsLoading}
+                setIsEditing={setIsEditing}
+            />
+        </div>
   );
 }
 
