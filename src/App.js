@@ -29,10 +29,12 @@ function App() {
         }, [])
 
     const handleDelete = (id) => {
+        setIsLoading(true)
         axios.delete(`${BASE_URL}/${id}`)
             .then(() => {
                 console.log(`Task ${id} deleted`)
                 setTasks(tasks.filter(task => task.id !== id));
+                setIsLoading(false);
             })
             .catch(error => console.log(error))
     };
@@ -65,49 +67,17 @@ function App() {
                 setIsLoading(false)
             })
             .catch(error => console.log(error))
-
-
-        // isDone === false
-        //     ? )
-        // console.log(isDone)
     }
 
 
     const handleEdit = (id) => {
         setIsEditing(id);
-        console.log(id)
-        console.log(isEditing)
-    }
-    const handleSubmitEdit = (id) => {
-        if(editTask) {
-            setIsLoading(true);
-            const patchTask = {
-                "todo": editTask,
-            }
-            axios.patch(`${BASE_URL}/${id}`, patchTask)
-                .then(() => {
-                    const newTasks = tasks.map(task => {
-                        return task.id === id
-                            ? {
-                                id,
-                                todo: editTask,
-                                done: task.done,
-                            }
-                            : task
-                    })
-                    setTasks(newTasks);
-                    setIsLoading(false)
-                })
-                .catch(error => console.log(error))
-            setIsEditing(false);
-        }
+        // console.log(id)
+        // console.log(isEditing)
     }
 
     const [editTask, setEditTask] = useState('');
-    const handleChangeEditTask = (e) => {
-        setEditTask(e.target.value)
-        console.log(editTask)
-    }
+
 
     const handleSubmitEditInput = (id) => {
         const patchTask = {
@@ -127,6 +97,8 @@ function App() {
             tasks={tasks}
             setTasks={setTasks}
             getTasks={getTasks}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
         />
         {isLoading && <ProgressBar />}
         <TaskList
@@ -137,9 +109,12 @@ function App() {
             handleDelete={handleDelete}
             handleEdit={handleEdit}
             isEditing={isEditing}
-            handleSubmitEdit={handleSubmitEdit}
             handleSubmitEditInput={handleSubmitEditInput}
-            handleChangeEditTask={handleChangeEditTask}
+
+            setIsLoading={setIsLoading}
+            setTasks={setTasks}
+            setIsEditing={setIsEditing}
+
 
         />
     </div>

@@ -21,9 +21,18 @@ function TaskList({
                       handleCheckBox,
                       striketrough,
                       handleDelete,
-                      handleEdit, isEditing, handleSubmitEdit,
+                      handleEdit, isEditing,
+                      // handleSubmitEdit,
                       handleSubmitEditInput,
-                      handleChangeEditTask,
+                      // handleChangeEditTask,
+
+    editTask,
+    setEditTask,
+                      setIsLoading,
+                      setTasks,
+                      setIsEditing,
+
+
 
 }) {
     return (
@@ -36,14 +45,19 @@ function TaskList({
                             task={task}
                             isDone={isDone}
                             handleCheckBox={handleCheckBox}
-                            striketrough={striketrough}
+                            // striketrough={striketrough}
                             handleDelete={handleDelete}
                             handleEdit={handleEdit}
                             isEditing={isEditing}
-                            handleSubmitEdit={handleSubmitEdit}
+                            // handleSubmitEdit={handleSubmitEdit}
 
                             handleSubmitEditInput={handleSubmitEditInput}
-                            handleChangeEditTask={handleChangeEditTask}
+                            // handleChangeEditTask={handleChangeEditTask}
+
+                            tasks={tasks}
+                            setIsLoading={setIsLoading}
+                            setTasks={setTasks}
+                            setIsEditing={setIsEditing}
 
                         />)
                 }

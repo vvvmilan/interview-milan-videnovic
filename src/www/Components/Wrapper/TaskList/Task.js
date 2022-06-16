@@ -6,6 +6,9 @@ import "./Task.css";
 import EditIcon from '@mui/icons-material/Edit';
 import TextField from "@mui/material/TextField";
 import CheckIcon from '@mui/icons-material/Check';
+import axios from "axios";
+import {BASE_URL} from "../../../../config";
+import {useState} from "react";
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const Item = styled(Paper)(({ theme }) => ({
@@ -20,19 +23,49 @@ function Task({ task,
                   isDone,
                   handleCheckBox,
                   striketrough,
-                  handleDelete, handleEdit, isEditing, handleSubmitEdit, handleSubmitEditInput,
-                  handleChangeEditTask,
+                  handleDelete, handleEdit, isEditing,
+
+    tasks,
+                  setIsLoading,
+                  setTasks,
+                  setIsEditing,
 
               }) {
-
-    // isDone  true ? {textDecoration: "line-through"} : null
-
 
     const taskDone = task.done
         ? {textDecoration: "line-through"}
         : null
 
-    // isDone === true ? console.log(isDone) : console.log('And');
+    const handleSubmitEdit = (id, value) => {
+        setIsLoading(true);
+        console.log(value)
+        const patchTask = {
+            todo: value
+        }
+        axios.patch(`${BASE_URL}/${id}`, patchTask)
+            .then(() => {
+                const newTasks = tasks.map(task => {
+                    return task.id === id
+                        ? {
+                            id,
+                            todo: value,
+                            done: task.done,
+                        }
+                        : task
+                })
+                setTasks(newTasks);
+                setIsLoading(false)
+            })
+            .catch(error => console.log(error))
+        setIsEditing(false);
+    }
+
+    const [newTaskInputValue, setNewTaskInputValue] = useState();
+    const handleNewTaskInputValue = (e) => {
+        setNewTaskInputValue(e.target.value)
+    }
+
+
 
 
 
@@ -49,20 +82,12 @@ function Task({ task,
                                 id="standard-size-normal"
                                 defaultValue={task.todo}
                                 variant="standard"
-
-                                onChange={handleChangeEditTask}
+                                onChange={handleNewTaskInputValue}
                                 onKeyPress={(e) => {
-                                    // console.log(e.target.value)
                                     e.key === 'Enter' &&
-                                    handleSubmitEdit(task.id)
-                                    // handleSubmitEditInput(task.id)
-                                    // console.log(e.key)
+                                    handleSubmitEdit(task.id, e.target.value)
                                 }
                                 }
-                                    // onSubmit={handleSubmitEdit}
-                                // onSubmit={(e) => e.preventDefault()
-                                    // console.log(e.target.value)}
-
                             />
                         :
                         <div className="taskTitle" style={striketrough}>
@@ -74,7 +99,7 @@ function Task({ task,
                         {isEditing === task.id
                             ? <CheckIcon
                                 className={`icon`}
-                                 onClick={() => handleSubmitEdit(task.id)}
+                                 onClick={() => handleSubmitEdit(task.id, newTaskInputValue)}
                                 sx={{ color: '#575b88' }}
                             />
                             : <EditIcon

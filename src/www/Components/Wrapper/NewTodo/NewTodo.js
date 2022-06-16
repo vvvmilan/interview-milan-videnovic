@@ -13,8 +13,9 @@ const Item = styled(Paper)(({ theme }) => ({
     textAlign: 'left',
 }));
 
-function NewTodo({ tasks, setTasks, getTasks }) {{
+function NewTodo({ tasks, setTasks, getTasks, isLoading, setIsLoading }) {{
     const handleSubmit = (e) => {
+        setIsLoading(true);
         e.preventDefault();
         const newTask = {
             "todo": e.target[0].value,
@@ -25,9 +26,13 @@ function NewTodo({ tasks, setTasks, getTasks }) {{
                 .then((response) => {
                     console.log(response)
                     setTasks([
+                        {
+                            ...newTask,
+                            id: response.data.id
+                        },
                         ...tasks,
-                        newTask
                         ])
+                    setIsLoading(false);
                     }
                 )
                 .catch(error => console.log(error))
