@@ -10,8 +10,14 @@ import ProgressBar from "./components/ProgressBar";
 import { AppContext } from "./providers/AppProvider";
 
 function App() {
-    const { tasks, setTasks, isLoading, setIsLoading } = useContext(AppContext);
-    const [isEditing, setIsEditing] = useState(false)
+    const {
+        tasks,
+        setTasks,
+        isLoading,
+        setIsLoading,
+        isEditing,
+        setIsEditing,
+    } = useContext(AppContext);
     const [isDone, setIsDone] = useState(false)
     const [striketrough, setStriketrough] = useState(null);
 

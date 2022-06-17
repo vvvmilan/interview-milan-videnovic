@@ -10,6 +10,7 @@ const AppContext = createContext({
 const AppProvider = ({ children }) => {
     const [tasks, setTasks] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [isEditing, setIsEditing] = useState(false)
 
 
 
@@ -20,6 +21,8 @@ const AppProvider = ({ children }) => {
                 setTasks,
                 isLoading,
                 setIsLoading,
+                isEditing,
+                setIsEditing,
             }}
         >
             { children }

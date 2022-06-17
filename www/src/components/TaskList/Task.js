@@ -28,14 +28,14 @@ function Task({
                   handleCheckBox,
                   handleDelete,
                   handleEdit,
-                  isEditing,
-                  setIsEditing,
               }) {
 
     const {
         tasks,
         setTasks,
         setIsLoading,
+        isEditing,
+        setIsEditing,
     } = useContext(AppContext)
 
     const taskDone = task.done

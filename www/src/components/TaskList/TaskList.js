@@ -21,12 +21,7 @@ function TaskList({
                       handleCheckBox,
                       handleDelete,
                       handleEdit,
-                      isEditing,
-                      setIsEditing,
-
-
-
-}) {
+    }) {
     const { tasks } = useContext(AppContext)
     return (
         <Box sx={{ width: '100%' }}>
@@ -39,8 +34,6 @@ function TaskList({
                             handleCheckBox={handleCheckBox}
                             handleDelete={handleDelete}
                             handleEdit={handleEdit}
-                            isEditing={isEditing}
-                            setIsEditing={setIsEditing}
                         />)
                 }
             </Stack>
