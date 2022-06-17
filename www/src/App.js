@@ -1,5 +1,6 @@
 import axios from "axios";
 import {useContext, useEffect, useState} from "react";
+import { AppContext } from "./providers/AppProvider";
 
 import './App.css';
 import {BASE_URL} from "./config";
@@ -7,7 +8,6 @@ import Header from "./components/Header/Header";
 import TaskList from "./components/TaskList/TaskList";
 import NewTodo from "./components/NewTodo/NewTodo"
 import ProgressBar from "./components/ProgressBar";
-import { AppContext } from "./providers/AppProvider";
 
 function App() {
     const {
@@ -17,9 +17,9 @@ function App() {
         setIsLoading,
         isEditing,
         setIsEditing,
+        isDone,
+        setIsDone,
     } = useContext(AppContext);
-    const [isDone, setIsDone] = useState(false)
-    const [striketrough, setStriketrough] = useState(null);
 
     const getTasks = () => {
         axios.get(BASE_URL)
@@ -49,10 +49,8 @@ function App() {
         setIsLoading(true)
         if(isDone === false) {
             setIsDone(true);
-            setStriketrough({textDecoration: "line-through"})
         } else {
             setIsDone(false)
-            setStriketrough(null);
         }
         axios.patch(`${BASE_URL}/${id}/change-status`)
             .then(() => {
@@ -71,20 +69,15 @@ function App() {
             .catch(error => console.log(error))
     }
 
-
     const handleEdit = (id) => {
         setIsEditing(id);
-        // console.log(id)
-        // console.log(isEditing)
     }
 
     const [editTask, setEditTask] = useState('');
 
-
     const handleSubmitEditInput = (id) => {
         const patchTask = {
             "todo": editTask,
-            // "todo": `PATCH done and hardcoded via TEXT FIELD222!`,
         }
         axios.patch(`${BASE_URL}/${id}`, patchTask)
             .then()
@@ -98,9 +91,8 @@ function App() {
             <NewTodo/>
             {isLoading && <ProgressBar />}
             <TaskList
-                isDone={isDone}
+                // isDone={isDone}
                 handleCheckBox={handleCheckBox}
-                striketrough={striketrough}
                 handleDelete={handleDelete}
                 handleEdit={handleEdit}
                 isEditing={isEditing}
