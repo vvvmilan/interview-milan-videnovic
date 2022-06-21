@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  api:
+    build: ./api/.
+    volumes:
+      - ./api/src:/api/src
+    ports:
+      - "3050:3050"
+  www:
+    build: ./www/.
+    volumes:
+      - ./www/src:/www/src
+    ports:
+      - "8080:3000"

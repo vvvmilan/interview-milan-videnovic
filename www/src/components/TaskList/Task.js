@@ -23,12 +23,7 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-function Task({
-                  task,
-                  handleCheckBox,
-                  handleDelete,
-                  handleEdit,
-              }) {
+function Task({ task }) {
 
     const {
         tasks,
@@ -36,6 +31,9 @@ function Task({
         setIsLoading,
         isEditing,
         setIsEditing,
+        handleCheckBox,
+        handleDelete,
+        handleEdit,
     } = useContext(AppContext)
 
     const taskDone = task.done
@@ -82,12 +80,12 @@ function Task({
                                 id="standard-size-normal"
                                 defaultValue={task.todo}
                                 variant="standard"
+                                style={{width: '85%'}}
                                 onChange={handleNewTaskInputValue}
                                 onKeyPress={(e) => {
                                     e.key === 'Enter' &&
                                     handleSubmitEdit(task.id, e.target.value)
-                                }
-                                }
+                                }}
                             />
                         :
                         <div className="taskTitle" style={taskDone}>

@@ -1,1 +1,1 @@
-export const BASE_URL = "https://wiv90yxntf.execute-api.eu-west-1.amazonaws.com/local";
+export const BASE_URL = "http://localhost:3050";

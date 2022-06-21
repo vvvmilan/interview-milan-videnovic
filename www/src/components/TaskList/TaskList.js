@@ -1,27 +1,12 @@
 import { useContext } from 'react';
-import Task from "./Task";
-
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
-import { styled } from '@mui/material/styles';
 
 import { AppContext } from "../../providers/AppProvider";
+import Task from "./Task";
 
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'left',
-    color: theme.palette.text.secondary,
-}));
-
-function TaskList({
-                      handleCheckBox,
-                      handleDelete,
-                      handleEdit,
-    }) {
+function TaskList() {
     const { tasks } = useContext(AppContext)
     return (
         <Box sx={{ width: '100%' }}>
@@ -31,9 +16,6 @@ function TaskList({
                         <Task
                             task={task}
                             key={task.id}
-                            handleCheckBox={handleCheckBox}
-                            handleDelete={handleDelete}
-                            handleEdit={handleEdit}
                         />)
                 }
             </Stack>
