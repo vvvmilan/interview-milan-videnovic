@@ -6,7 +6,7 @@ import { AppContext } from "../../providers/AppProvider";
 import './NewTodo.css';
 import {BASE_URL} from "../../config";
 
-function NewTodo() {{
+function NewTodo() {
     const { tasks,
         setTasks,
         setIsLoading
@@ -55,6 +55,6 @@ function NewTodo() {{
             />
         </form>
     );
-}}
+}
 
 export default NewTodo;
