@@ -7,7 +7,7 @@ const {
   remove, patch, changeStatus,
 } = require('../controlers/tasks')
 
-router.get('/', (req, res) => {
+router.get('/api', (req, res) => {
   const tasks = get();
 
   res
@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
     .json(tasks)
 })
 
-router.post('/', (req, res) => {
+router.post('/api', (req, res) => {
   const body = req.body;
   const { status, data } = create(body);
 
@@ -24,7 +24,7 @@ router.post('/', (req, res) => {
     .json({ ...data })
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/api/:id', (req, res) => {
   const { id } = req.params;
 
   const { status, data } = remove(id);
@@ -34,7 +34,7 @@ router.delete('/:id', (req, res) => {
     .json({ ...data })
 })
 
-router.patch('/:id', (req, res) => {
+router.patch('/api/:id', (req, res) => {
   const { id } = req.params;
   const body = req.body;
 
@@ -45,7 +45,7 @@ router.patch('/:id', (req, res) => {
     .json({ ...data })
 })
 
-router.patch('/:id/change-status', (req, res) => {
+router.patch('/api/:id/change-status', (req, res) => {
   const { id } = req.params;
 
   const { status, data } = changeStatus(id);

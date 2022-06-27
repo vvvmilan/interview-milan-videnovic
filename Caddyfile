@@ -1,0 +1,6 @@
+todo.local {
+    tls internal
+    reverse_proxy /api* http://api:3050
+    reverse_proxy /static* http://www:3000
+    reverse_proxy http://www:3000
+}

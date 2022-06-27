@@ -27,14 +27,12 @@ function App() {
                     {isLoading && <ProgressBar />}
                     <TaskList />
                 </div>
-
             </div>
             <div className="footer">
                 <Footer />
             </div>
         </>
-
-);
+    );
 }
 
 export default App;
